@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular/angular.min.js"></script>
+    <script src="../lib/angular/angular-route.js"></script>
+    <script src="../lib/angular/angular-route.min.js"></script>
+    <script>
+        var app = angular.module("app", ["ngRoute"]);
+        app.config(function ($routeProvider) {
+            $routeProvider
+                .when('/home', {
+                    templateUrl: 'app/HomePage.html',
+                });
+        });
+
+        app.controller('HomeController', function ($scope, $http, $sce) {
+            $scope.showLoginPage = true;
+            $scope.showRepoPage = false;
+
+            $scope.reset = function () {
+                $scope.txtUserName = "";
+                $scope.txtPassword = "";
+            }
+
+            $scope.fetchRepoData = function () {
+                if (txtUn.value == "") {
+                    alert("Enter user name");
+                    txtUn.focus();
+                }
+                else if (txtPwd.value == "") {
+                    alert("Enter password");
+                    txtPwd.focus();
+                }
+                else {
+                    $scope.showLoginPage = false;
+                    $scope.showRepoPage = true;
+
+                    // base 64 encoding
+                    $scope.encodedString = btoa($scope.txtUserName + ':' + $scope.txtPassword);
+
+                    // request object
+                    var req = {
+                        method: 'GET',
+                        url: 'http://localhost:32287/user/' + $scope.txtUserName + '/',
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Authorization': $scope.encodedString
+                        }
+                    }
+
+                    $http(req).then(function (response) {
+                        $scope.gitRepos = response.data;
+                        angular.forEach($scope.gitRepos, function (item, index) {
+                            item.sno = index + 1;
+                        })
+                    }, function errorCallback(response) {
+                        $scope.gitRepos = response;
+                    });
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <div ng-app="app" ng-controller="HomeController">
+        <div ng-show="showLoginPage">
+            <table>
+                <tr>
+                    <td>User Name</td>
+                    <td><input type="text" id="txtUn" ng-model="txtUserName" /></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="text" id="txtPwd" ng-model="txtPassword" /></td>
+                </tr>
+                <tr style="align-content:center">
+                    <td><input type="button" value="Fetch git repos" ng-click="fetchRepoData()" /></td>
+                    <td><input type="button" value="reset" ng-click="reset()" /></td>
+                </tr>
+            </table>
+        </div>
+        <div ng-show="showRepoPage">
+            <table class="prTable" style="width:30%">
+                <thead>
+                    <tr>
+                        <th style="width:20%">S.No</th>
+                        <th style="width:60%">Git Repo Name</th>
+                        <th style="width:20%">PR Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat-start="gitRepo in gitRepos">
+                        <td>{{gitRepo.sno}}</td>
+                        <td><a href="{{gitRepo.html_url}}" target="_blank">{{gitRepo.name}}</a></td>
+                        <td>{{gitRepo.PRCount}}</td>
+                    </tr>
+                    <tr data-ng-repeat-end></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<style>
+    table.prTable {
+        border: 1px solid #1C6EA4;
+        background-color: #EEEEEE;
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+    }
+
+    table.prTable td, table.prTable th {
+        border: 1px solid #AAAAAA;
+        padding: 3px 2px;
+    }
+
+    table.prTable tbody td {
+        font-size: 13px;
+    }
+
+    table.prTable tr:nth-child(even) {
+        background: #D0E4F5;
+    }
+
+    table.prTable thead {
+        background: #1C6EA4;
+        background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+        background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+        background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+        border-bottom: 2px solid #444444;
+    }
+
+    table.prTable thead th {
+        font-size: 15px;
+        font-weight: bold;
+        color: #FFFFFF;
+        border-left: 2px solid #D0E4F5;
+    }
+
+    table.prTable thead th:first-child {
+        border-left: none;
+    }
+
+    table.prTable tfoot {
+        font-size: 14px;
+        font-weight: bold;
+        color: #FFFFFF;
+        background: #D0E4F5;
+        background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+        background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+        background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+        border-top: 2px solid #444444;
+    }
+
+    table.prTable tfoot td {
+        font-size: 14px;
+    }
+
+    table.prTable tfoot .links {
+        text-align: right;
+    }
+
+    table.prTable tfoot .links a {
+        display: inline-block;
+        background: #1C6EA4;
+        color: #FFFFFF;
+        padding: 2px 8px;
+        border-radius: 5px;
+    }
+</style>

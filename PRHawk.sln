@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRHawk.API", "PRHawk\PRHawk.API.csproj", "{983BE21F-A520-4EB4-8ACE-14364A83FC06}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PRHawk.WebProj", "PRHawk.WebProj\", "{3155318A-3295-4ABC-8BAB-5D21122AE860}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_3808"
+		Debug.AspNetCompiler.PhysicalPath = "PRHawk.WebProj\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3808\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_3808"
+		Release.AspNetCompiler.PhysicalPath = "PRHawk.WebProj\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3808\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "3808"
+		SlnRelativePath = "PRHawk.WebProj\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{983BE21F-A520-4EB4-8ACE-14364A83FC06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{983BE21F-A520-4EB4-8ACE-14364A83FC06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{983BE21F-A520-4EB4-8ACE-14364A83FC06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{983BE21F-A520-4EB4-8ACE-14364A83FC06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3155318A-3295-4ABC-8BAB-5D21122AE860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3155318A-3295-4ABC-8BAB-5D21122AE860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3155318A-3295-4ABC-8BAB-5D21122AE860}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{3155318A-3295-4ABC-8BAB-5D21122AE860}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73F4D9FD-5498-4AEB-A53F-299835C93BF3}
+	EndGlobalSection
+EndGlobal
